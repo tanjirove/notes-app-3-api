@@ -31,7 +31,7 @@ provider:
   # 'iamRoleStatements' defines the permission policy for the Lambda function.
   # In this case Lambda functions are granted with permissions to access DynamoDB.
   iamRoleStatements:
-    - Effect: Deny
+    - Effect: Allow
       Action:
         - dynamodb:DescribeTable
         - dynamodb:Query
@@ -121,7 +121,7 @@ resources:
   ## API Gateway Errors
   - ${file(resources/api-gateway-errors.yml)}
   ## DynamoDB
-  #- ${file(resources/dynamodb-table.yml)}
+  - ${file(resources/dynamodb-table.yml)}
   ## S3
   - ${file(resources/s3-bucket.yml)}
   ## Cognito
