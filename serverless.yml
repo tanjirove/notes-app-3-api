@@ -14,7 +14,7 @@ custom:
   # commands. Or fallsback to what we have set in the provider section.
   stage: ${opt:stage, self:provider.stage}
   # Set the table name here so we can use it while testing locally
-  tableName: ${self:custom.stage}-notes-v
+  tableName: ${self:custom.stage}-notes-v5
 
 provider:
   name: aws
@@ -42,8 +42,7 @@ provider:
         - dynamodb:DeleteItem
       # Restrict our IAM role permissions to
       # the specific table for the stage
-      Resource:
-        - "Fn::GetAtt": [NotesTable, Arn]
+      Resource: *
 
 functions:
   # Defines an HTTP API endpoint that calls the main function in create.js
@@ -121,7 +120,7 @@ resources:
   ## API Gateway Errors
   - ${file(resources/api-gateway-errors.yml)}
   ## DynamoDB
-  - ${file(resources/dynamodb-table.yml)}
+  #- ${file(resources/dynamodb-table.yml)}
   ## S3
   - ${file(resources/s3-bucket.yml)}
   ## Cognito
