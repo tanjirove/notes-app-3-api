@@ -3,7 +3,7 @@ Resources:
     Type: AWS::DynamoDB::Table
 
     Properties:
-      TableName: ${self:custom.tableName}-v7
+      TableName: ${self:custom.tableName}
       AttributeDefinitions:
         - AttributeName: userId
           AttributeType: S
