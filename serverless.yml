@@ -14,7 +14,7 @@ custom:
   # commands. Or fallsback to what we have set in the provider section.
   stage: ${opt:stage, self:provider.stage}
   # Set the table name here so we can use it while testing locally
-  tableName: ${self:custom.stage}-notes-v7
+  tableName: ${self:custom.stage}-notes-v9
 
 provider:
   name: aws
@@ -31,7 +31,7 @@ provider:
   # 'iamRoleStatements' defines the permission policy for the Lambda function.
   # In this case Lambda functions are granted with permissions to access DynamoDB.
   iamRoleStatements:
-    - Effect: Allow
+    - Effect: Deny
       Action:
         - dynamodb:DescribeTable
         - dynamodb:Query
@@ -43,7 +43,7 @@ provider:
       # Restrict our IAM role permissions to
       # the specific table for the stage
       Resource:
-        - "Fn::GetAtt": [NotesTableV7, Arn]
+        - "Fn::GetAtt": [NotesTable, Arn]
 
 functions:
   # Defines an HTTP API endpoint that calls the main function in create.js

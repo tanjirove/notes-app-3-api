@@ -1,5 +1,5 @@
 Resources:
-  NotesTableV7:
+  NotesTable:
     Type: AWS::DynamoDB::Table
 
     Properties:
