@@ -21,19 +21,6 @@ provider:
   runtime: nodejs12.x
   stage: dev3
   region: ap-southeast-2
-  stackPolicy:
-    - Effect: Deny
-      Action: Update:Delete
-      Principal: "*"
-      Resource: "*"
-      Condition:
-        StringEquals:
-          ResourceType:
-            - AWS::DynamoDB::Table
-    - Effect: Allow
-      Action: "Update:*"
-      Principal: "*"
-      Resource: "*"
   # These environment variables are made available to our functions
   # under process.env.
   environment:
