@@ -23,7 +23,15 @@ provider:
   region: ap-southeast-2
   stackPolicy:
     - Effect: Deny
-      NotAction: Update:Delete
+      Action: Update:Replace
+      Principal: "*"
+      Resource: "*"
+      Condition:
+        StringEquals:
+          ResourceType:
+            - AWS::DynamoDB::Table
+    - Effect: Allow
+      Action: "Update:*"
       Principal: "*"
       Resource: "*"
   # These environment variables are made available to our functions
