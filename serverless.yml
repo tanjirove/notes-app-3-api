@@ -14,14 +14,26 @@ custom:
   # commands. Or fallsback to what we have set in the provider section.
   stage: ${opt:stage, self:provider.stage}
   # Set the table name here so we can use it while testing locally
-  tableName: ${self:custom.stage}-notes-v18 # change table from v17 to v18
+  tableName: ${self:custom.stage}-notes-v20 # change table from v17 to v18
 
 provider:
   name: aws
   runtime: nodejs12.x
   stage: dev3
   region: ap-southeast-2
-
+    stackPolicy:
+    - Effect: Deny
+      Action: Update:Replace
+      Principal: "*"
+      Resource: "*"
+      Condition:
+        StringEquals:
+          ResourceType:
+            - AWS::DynamoDB::Table
+    - Effect: Allow
+      Action: "Update:*"
+      Principal: "*"
+      Resource: "*"
   # These environment variables are made available to our functions
   # under process.env.
   environment:
@@ -31,7 +43,7 @@ provider:
   # 'iamRoleStatements' defines the permission policy for the Lambda function.
   # In this case Lambda functions are granted with permissions to access DynamoDB.
   iamRoleStatements:
-    - Effect: Deny
+    - Effect: Allow
       Action:
         - dynamodb:DescribeTable
         - dynamodb:Query
