@@ -23,7 +23,7 @@ provider:
   region: ap-southeast-2
   stackPolicy:
     - Effect: Deny
-      Action: Delete
+      Action: Update:Delete
       Principal: "*"
       Resource: "*"
       Condition:
